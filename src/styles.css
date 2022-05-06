@@ -1,0 +1,24 @@
+.mainMenu{
+    justify-content: center;
+    text-align: center;
+}
+
+.mainMenuList{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.mainMenuItem{
+    font-size: 18px;
+    font-weight: 600;
+    text-shadow: 5px 2px 8px rgba(20, 60, 237, 0.4);
+    color: rgb(20, 60, 237);
+    cursor: pointer;
+}
+
+.mainMenuItem:hover{
+    font-size: 17px;
+    color: rgba(20, 60, 237, 0.7);
+}
