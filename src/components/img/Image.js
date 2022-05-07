@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import {
     useEffect,
     useState,
@@ -13,7 +14,11 @@ export const Image = ({ source }) => {
 
     useEffect(() => {
         if(source === 'apod'){
-            axios.get('/planetary/apod')
+            axios.get('/planetary/apod', {
+                params: {
+                    count: 5
+                }
+            })
             .then(response => {
                 console.log(response.data);
                 setImgData(response.data);
@@ -28,48 +33,88 @@ export const Image = ({ source }) => {
     return (
         <div className='container'>
             {
-                imgData ? 
-                    <div className="apodCard">
-                        <div className='imageContainer'>
+                imgData && imgData.map((img, i) => {
+                    return (
+                        <div key={i} className="apodCard">
                             <img 
-                                src={ imgData.url } 
+                                src={ img.url } 
                                 className='apodImage'
-                                alt={imgData.title}
+                                alt={img.title}
                             />
-                            <div 
-                                className='imageMessage'
-                                onClick={goToHDImage}
-                            >
-                                <p>Click para ver en HD</p>
-                            </div>
-                        </div>
-                        <p className='apodTitle'>"{ imgData.title }"</p>
-                        {
-                            imgData.copyright && 
-                            <p className='apodCopy'>{ imgData.copyright }</p>
-                        }
-                        {
-                            showInfo ? 
-                            <>
-                                <p 
-                                    className='apodExplanation'
-                                >{imgData.explanation}</p>
-                                <p 
+                            <p className='apodTitle'>"{ img.title }"</p>
+                            {
+                                img.copyright && 
+                                <p className='apodCopy'>{ img.copyright }</p>
+                            }
+                            {
+                                showInfo ? 
+                                <>
+                                    <p 
+                                        className='apodExplanation'
+                                    >{img.explanation}</p>
+                                    <p 
+                                        className='showMoreButton'
+                                        onClick={() => { setShowInfo(!showInfo) }}
+                                    >Ocultar</p>
+                                </>
+                                : <p
                                     className='showMoreButton'
-                                    onClick={() => { setShowInfo(!showInfo) }}
-                                >Ocultar</p>
-                            </>
-                            : <p
-                                className='showMoreButton'
-                                onClick={() => { setShowInfo(!showInfo) }}  
-                            >Leer más...</p>
-                        }
-                    </div>
-                : 
-                <div>
-                    <p>Loader</p>
-                </div>
+                                    onClick={() => { setShowInfo(!showInfo) }}  
+                                >Leer más...</p>
+                            }
+                        </div>  
+                    )
+                })
             }
-        </div>
+    </div>  
     )
+
+
+    // return (
+    //     <div className='container'>
+    //         {
+    //             imgData ?
+    //                 <div className="apodCard">
+    //                     <div className='imageContainer'>
+    //                         <img 
+    //                             src={ imgData.url } 
+    //                             className='apodImage'
+    //                             alt={imgData.title}
+    //                         />
+    //                         <div 
+    //                             className='imageMessage'
+    //                             onClick={goToHDImage}
+    //                         >
+    //                             <p>Click para ver en HD</p>
+    //                         </div>
+    //                     </div>
+    //                     <p className='apodTitle'>"{ imgData.title }"</p>
+    //                     {
+    //                         imgData.copyright && 
+    //                         <p className='apodCopy'>{ imgData.copyright }</p>
+    //                     }
+    //                     {
+    //                         showInfo ? 
+    //                         <>
+    //                             <p 
+    //                                 className='apodExplanation'
+    //                             >{imgData.explanation}</p>
+    //                             <p 
+    //                                 className='showMoreButton'
+    //                                 onClick={() => { setShowInfo(!showInfo) }}
+    //                             >Ocultar</p>
+    //                         </>
+    //                         : <p
+    //                             className='showMoreButton'
+    //                             onClick={() => { setShowInfo(!showInfo) }}  
+    //                         >Leer más...</p>
+    //                     }
+    //                 </div>
+    //             : 
+    //             <div>
+    //                 <p>Loader</p>
+    //             </div>
+    //         }
+    //     </div>
+    // )
 }
