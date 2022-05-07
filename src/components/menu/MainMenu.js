@@ -10,13 +10,13 @@ export const MainMenu = ({ setSource }) => {
                     className="mainMenuItem"
                     onClick={() => { setSource('apod') }}
                 >
-                    <a>Imagen del día</a>
+                    <p>Imagen del día</p>
                 </li>
                 <li 
                     className="mainMenuItem"
                     onClick={() => { setSource('Imagenes policromaticas') }}
                 >
-                    <a>Imagenes policromaticas de la tierra</a>
+                    <p>Imagenes policromaticas de la tierra</p>
                 </li>
             </ul>
         </div>

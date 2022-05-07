@@ -34,6 +34,7 @@ export const Image = ({ source }) => {
                             <img 
                                 src={ imgData.url } 
                                 className='apodImage'
+                                alt={imgData.title}
                             />
                             <div 
                                 className='imageMessage'
