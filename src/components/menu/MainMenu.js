@@ -8,7 +8,7 @@ export const MainMenu = ({ setSource }) => {
             <ul className="mainMenuList">
                 <li 
                     className="mainMenuItem"
-                    onClick={() => { setSource('Imagen del día') }}
+                    onClick={() => { setSource('apod') }}
                 >
                     <a>Imagen del día</a>
                 </li>

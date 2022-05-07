@@ -3,17 +3,18 @@ import {
 } from 'react';
 
 import { MainMenu } from "./components/menu/MainMenu";
+import { Image } from './components/img/Image';
 
 import './styles.css';
 
 export const App = () => {
 
-  const [source, setSource] = useState();
+  const [source, setSource] = useState('apod');
 
   return (
     <div className="App">
       <MainMenu setSource={setSource} />
-      <p>{ source }</p>
+      <Image source={source} />
     </div>
   );
 }
