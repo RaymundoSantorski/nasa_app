@@ -2,8 +2,7 @@ import {
     useState,
 } from 'react';
 
-import { MainMenu } from "./components/menu/MainMenu";
-import { Image } from './components/img/Image';
+import { Caroussel } from './components/Caroussel';
 
 import './styles.css';
 
@@ -13,8 +12,7 @@ export const App = () => {
 
   return (
     <div className="App">
-      <MainMenu setSource={setSource} />
-      <Image source={source} />
+      <Caroussel source={source} />
     </div>
   );
 }

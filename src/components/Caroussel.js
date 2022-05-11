@@ -1,16 +1,16 @@
-import { type } from '@testing-library/user-event/dist/type';
 import {
     useEffect,
     useState,
 } from 'react';
 
-import axios from '../../helpers/axiosConfig';
+import axios from '../helpers/axiosConfig';
+import { Image } from './Image';
 
 
-export const Image = ({ source }) => {
+export const Caroussel = ({ source }) => {
 
     const [imgData, setImgData] = useState();
-    const [showInfo, setShowInfo] = useState(false);
+    const [currentImage, setCurrentImage] =useState(0);
 
     useEffect(() => {
         if(source === 'apod'){
@@ -26,47 +26,16 @@ export const Image = ({ source }) => {
         }
     }, [source]);
 
-    const goToHDImage = () => {
-        window.open(imgData.hdurl);
-    }
-
     return (
         <div className='container'>
             {
                 imgData && imgData.map((img, i) => {
                     return (
-                        <div key={i} className="apodCard">
-                            <img 
-                                src={ img.url } 
-                                className='apodImage'
-                                alt={img.title}
-                            />
-                            <p className='apodTitle'>"{ img.title }"</p>
-                            {
-                                img.copyright && 
-                                <p className='apodCopy'>{ img.copyright }</p>
-                            }
-                            {
-                                showInfo ? 
-                                <>
-                                    <p 
-                                        className='apodExplanation'
-                                    >{img.explanation}</p>
-                                    <p 
-                                        className='showMoreButton'
-                                        onClick={() => { setShowInfo(!showInfo) }}
-                                    >Ocultar</p>
-                                </>
-                                : <p
-                                    className='showMoreButton'
-                                    onClick={() => { setShowInfo(!showInfo) }}  
-                                >Leer más...</p>
-                            }
-                        </div>  
+                        <Image img={img} key={i} current={currentImage} />
                     )
                 })
             }
-    </div>  
+        </div>  
     )
 
 

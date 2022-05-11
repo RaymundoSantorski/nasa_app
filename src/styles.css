@@ -41,6 +41,7 @@
     border: 1px solid rgb(220, 220, 220);
     box-shadow: 4px 4px 8px rgba(80, 80, 80, 0.4);
     background-color: rgb(245, 245, 245);
+    width: 90%;
 }
 
 .apodTitle{
@@ -70,7 +71,15 @@
 }
 
 .apodImage{
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     border-radius: 5px;
-    max-width: 300px;
+    max-height: 80vh;
+}
+
+@media (min-width: 1200px) {
+    .apodCard{
+        width: 45%;
+        margin: 10px;
+    }        
 }
