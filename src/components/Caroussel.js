@@ -12,6 +12,18 @@ export const Caroussel = ({ source }) => {
     const [imgData, setImgData] = useState();
     const [currentImage, setCurrentImage] =useState(0);
 
+    const nextImage = () => {
+        if(currentImage < imgData.length-1){
+            setCurrentImage(currentImage + 1);
+        }
+    }
+
+    const lastImage = () => {
+        if(currentImage > 0){
+            setCurrentImage(currentImage - 1);
+        }
+    }
+
     useEffect(() => {
         if(source === 'apod'){
             axios.get('/planetary/apod', {
@@ -20,7 +32,6 @@ export const Caroussel = ({ source }) => {
                 }
             })
             .then(response => {
-                console.log(response.data);
                 setImgData(response.data);
             });
         }
@@ -31,7 +42,7 @@ export const Caroussel = ({ source }) => {
             {
                 imgData && imgData.map((img, i) => {
                     return (
-                        <Image img={img} key={i} current={currentImage} />
+                        <Image img={img} key={i} current={currentImage} actual={i} next={nextImage} last={lastImage} />
                     )
                 })
             }
